@@ -28,6 +28,21 @@ var albumMarconi = {
      ]
 };
 
+var albumZeppelin = {
+    title: 'Houses of the Holy',
+    artist: 'Led Zeppelin',
+    label: 'Swan Song',
+    year: '1977',
+    albumArtUrl: 'assets/images/album_covers/22.jpg',
+    songs: [
+        { title: 'The Ocean', duration: '4:31' },
+        { title: 'The Song Remains The Same', duration: '5:29' },
+        { title: 'Dyer Maker', duration: '4:23' },
+        { title: 'No Quarter', duration: '7:03'},
+        { title: 'Over The Hills And Far Away', duration: '4:51'}
+    ]
+};
+
 var createSongRow = function(songNumber, songName, songLength) {
     var template =
        '<tr class = "album-view-song-item"'
@@ -53,6 +68,7 @@ var setCurrentAlbum = function(album) {
     albumReleaseInfo.firstChild.nodeValue = album.year + ' ' + album.label;
     albumImage.setAttribute('src', album.albumArtUrl);
     //use for loop to go through all the songs and insert them into the html
+    albumSongList.innerHTML = "";
     for (var i = 0; i < album.songs.length; i++) {
         albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
     }
@@ -61,3 +77,15 @@ var setCurrentAlbum = function(album) {
 window.onload = function() {
     setCurrentAlbum(albumPicasso);
 };
+
+var albums = [albumPicasso, albumMarconi, albumZeppelin];
+var currentAlbumIndex = 0;
+var albumSwitch = function () {
+    currentAlbumIndex++;
+    if (currentAlbumIndex >= albums.length) {
+        currentAlbumIndex = 0;
+    }
+    setCurrentAlbum(albums[currentAlbumIndex]);
+};
+
+document.getElementsByClassName('album-cover-art')[0].addEventListener('click', albumSwitch);
