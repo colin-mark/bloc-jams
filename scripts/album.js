@@ -29,7 +29,7 @@ var createSongRow = function(songNumber, songName, songLength) {
         var songNumber = $(this).data('song-number');
 
         if (currentlyPlayingSongNumber !== null) {
-            var currentlyPlayingCell = getSongNumberCell();
+            var currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);
             currentlyPlayingCell.html(currentlyPlayingSongNumber);
         }
         if (currentlyPlayingSongNumber !== songNumber) {
